@@ -24,5 +24,46 @@ void input() {
     cout << "Array index ke-" << i << " : ";
     cin >> arr[i];
     } 
+}
 
+void mergeSort(int low, int high) {
+    if (low >= high) {
+        return;
+    }
+
+    int mid = (low + high) / 2;
+
+    mergeSort(low, mid);      // Left half
+    mergeSort(mid + 1, high); // Right half
+
+    int i = low;     // Starting index for left subarray
+    int j = mid + 1; // Starting index for right subarray
+    int k = low;     // Starting index for temporary array B
+
+    while (i <= mid && j <= high) {
+        if (arr[i] <= arr[j]) {
+            B[k] = arr[i];
+            i++;
+        } else {
+            B[k] = arr[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (j <= high) {
+        B[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    while (i <= mid) {
+        B[k] = arr[i];
+        i++;
+        k++;
+    }
+
+    for (int x = low; x <= high; x++) {
+        arr[x] = B[x];
+    }
 }
